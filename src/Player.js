@@ -65,4 +65,9 @@ export default class Player {
             this.player.setVelocityY(-330);
         }
     }
+
+    getPlayer()
+    {
+        return this.player;
+    }
 }
