@@ -26,11 +26,6 @@ var config = {
     }
 };
 
-function collectStar (player, star)
-{
-    star.disableBody(true, true);
-}
-
 var game = new Phaser.Game(config);
 
 function preload ()
@@ -50,10 +45,23 @@ var player;
 var cursors;
 var stars;
 
+var score = 0;
+var scoreText;
+
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
+}
+
 function create ()
 {
     this.add.image(400, 300, 'sky');
-
+    
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    
     cursors = this.input.keyboard.createCursorKeys();
     
     platforms = this.physics.add.staticGroup();
