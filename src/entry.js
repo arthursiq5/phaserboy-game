@@ -42,10 +42,13 @@ function preload ()
 
 var platforms;
 var player;
+var cursors;
 
 function create ()
 {
     this.add.image(400, 300, 'sky');
+
+    cursors = this.input.keyboard.createCursorKeys();
     
     platforms = this.physics.add.staticGroup();
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -54,7 +57,7 @@ function create ()
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
     
-    player = new Player(this);
+    player = new Player(this, cursors);
     player.create();
     
     player.addCollider(platforms);
@@ -62,4 +65,5 @@ function create ()
 
 function update ()
 {
+    player.update()
 }

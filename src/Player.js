@@ -1,7 +1,8 @@
 export default class Player {
-    constructor(game)
+    constructor(game, cursors)
     {
         this.game = game;
+        this.cursors = cursors
         this.player = null;
     }
 
@@ -36,5 +37,32 @@ export default class Player {
     addCollider(obj)
     {
         this.game.physics.add.collider(this.player, obj);
+    }
+
+    update()
+    {
+        if (this.cursors.left.isDown)
+        {
+            this.player.setVelocityX(-160);
+
+            this.player.anims.play('left', true);
+        }
+        else if (this.cursors.right.isDown)
+        {
+            this.player.setVelocityX(160);
+
+            this.player.anims.play('right', true);
+        }
+        else
+        {
+            this.player.setVelocityX(0);
+
+            this.player.anims.play('turn');
+        }
+
+        if (this.cursors.up.isDown && this.player.body.touching.down)
+        {
+            this.player.setVelocityY(-330);
+        }
     }
 }
